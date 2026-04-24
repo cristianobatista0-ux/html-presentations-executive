@@ -1,0 +1,112 @@
+{
+  "title": "Expansão Fulfillment Sul — Board Deck",
+  "profile": "corporate",
+  "palette": "midnight_executive",
+  "author": "Cristiano Batista",
+  "date": "2026-04-23",
+  "slides": [
+    {
+      "layout": "title",
+      "title": "Expansão Fulfillment Sul",
+      "subtitle": "Recomendação de capex R$ 18M — Board Apr/2026",
+      "date": "23 Abr 2026",
+      "confidential": true
+    },
+    {
+      "layout": "executive_summary",
+      "action_title": "Recomendamos R$ 18M de capex para abrir CD em Curitiba — payback 22 meses, +R$ 52M GMV em 3 anos",
+      "bullets": [
+        "Demanda do Sul cresceu 48% YoY; SLA caiu para 72%",
+        "CD próprio reduz frete em 31% e eleva NPS em 14pt (benchmark interno Norte)",
+        "Janela ótima: terreno 18% abaixo da média; concorrente X entra no Sul em 2027"
+      ],
+      "source": "BI interno jan-dez/2025; research de mercado contratado"
+    },
+    {
+      "layout": "kpi_callout",
+      "action_title": "Três indicadores sustentam a tese",
+      "kpis": [
+        {"value": "+48%", "label": "Crescimento de demanda\n2025 vs 2024"},
+        {"value": "22 meses", "label": "Payback esperado"},
+        {"value": "+R$ 52M", "label": "GMV incremental\nem 3 anos (base)", "highlight": true}
+      ],
+      "source": "BI interno; modelo financeiro v2.3"
+    },
+    {
+      "layout": "chart",
+      "action_title": "Demanda cresceu 48% mas SLA despencou — gap operacional em 2025",
+      "chart": {
+        "type": "column",
+        "x": ["Q1'24","Q2'24","Q3'24","Q4'24","Q1'25","Q2'25","Q3'25","Q4'25"],
+        "series": [
+          {"label": "Pedidos (mil)", "values": [42, 48, 51, 62, 68, 74, 82, 92]}
+        ]
+      },
+      "source": "BI interno, pedidos Sul, jan/2024-dez/2025"
+    },
+    {
+      "layout": "two_column",
+      "action_title": "CD próprio reduz frete em 31% e elimina dependência operacional",
+      "left_bullets": [
+        "Frete 3PL R$ 12,40/pedido → CD próprio R$ 8,55 (-31%)",
+        "SLA sobe de 72% para 96% (target interno 94%)",
+        "Dependência técnica do 3PL cai de 100% para 20%"
+      ],
+      "right_visual": {
+        "type": "bar",
+        "data": [
+          {"label": "3PL atual", "value": 12.40},
+          {"label": "CD próprio", "value": 8.55, "highlight": true}
+        ],
+        "unit": "R$/pedido"
+      },
+      "source": "contrato 3PL 2025; modelo financeiro CD v2.3"
+    },
+    {
+      "layout": "comparison",
+      "action_title": "CD próprio supera 3PL em 4 das 5 dimensões — único trade-off é capex inicial",
+      "columns": [
+        {"name": "3PL (atual)"},
+        {"name": "CD próprio", "recommended": true}
+      ],
+      "rows": [
+        {"dimension": "Custo/pedido", "values": ["R$ 12,40", "R$ 8,55 (-31%)"]},
+        {"dimension": "SLA", "values": ["72% atual", "96% projetado"]},
+        {"dimension": "NPS", "values": ["64", "78 (benchmark Norte)"]},
+        {"dimension": "Controle", "values": ["Baixo", "Alto"]},
+        {"dimension": "Capex inicial", "values": ["R$ 0", "R$ 18M"]}
+      ]
+    },
+    {
+      "layout": "timeline",
+      "action_title": "Em 9 meses operamos; em 22 pagamos",
+      "milestones": [
+        {"when": "Hoje", "label": "Decisão Board"},
+        {"when": "+3m", "label": "Terreno + obra fechados"},
+        {"when": "+9m", "label": "Operação inicia"},
+        {"when": "+15m", "label": "Ramp-up completo"},
+        {"when": "+22m", "label": "Break-even", "highlight": true}
+      ]
+    },
+    {
+      "layout": "image_right",
+      "action_title": "Janela fecha em 2027 quando concorrente X entra no Sul",
+      "bullets": [
+        "X anunciou obra no Paraná em Fev/2026",
+        "Decisão em Abr vs Jul significa -6m de vantagem",
+        "Custo de esperar: R$ 7M em GMV perdido"
+      ],
+      "source": "research competitivo Mar/2026"
+    },
+    {
+      "layout": "closing",
+      "action_title": "Aprovação do Board destrava compra do terreno em 30 dias",
+      "next_steps": [
+        {"action": "Aprovar capex R$ 18M", "owner": "Board", "due": "Hoje"},
+        {"action": "Fechar compra do terreno", "owner": "CFO + Legal", "due": "30 dias"},
+        {"action": "Iniciar obras", "owner": "COO", "due": "60 dias"}
+      ],
+      "next_review": "Board Jul/2026"
+    }
+  ]
+}

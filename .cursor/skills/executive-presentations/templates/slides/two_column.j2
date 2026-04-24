@@ -1,0 +1,25 @@
+{% import "macros.j2" as m %}
+<section class="slide slide-two theme-band" id="slide-{{ slide_index }}">
+  <div class="preset-signature" aria-hidden="true"></div>
+  <div class="slide-header-strip"><div class="slide-header-inner">{{ m.kicker_title(slide) }}</div></div>
+  <div class="slide-content two-col-grid">
+    <div class="col-left reveal">
+      <ul class="bullet-list">
+        {% for b in slide.left_bullets %}<li>{{ b }}</li>{% endfor %}
+      </ul>
+    </div>
+    <div class="col-right reveal">
+      {% set rv = slide.right_visual or {} %}
+      {% if rv.type == "bar" %}
+      <div class="mini-chart-wrap">{{ mini_bar_svg(rv) | safe }}</div>
+      {% elif slide.right_text %}
+      <div class="right-text-box"><p>{{ slide.right_text | replace('\n', '<br/>') | safe }}</p></div>
+      {% elif slide.image_path %}
+      <img class="hero-img cover" src="{{ asset(slide.image_path) }}" alt="" loading="lazy" />
+      {% else %}
+      <div class="hero-placeholder small"></div>
+      {% endif %}
+    </div>
+    {{ m.source_foot(slide) }}
+  </div>
+</section>

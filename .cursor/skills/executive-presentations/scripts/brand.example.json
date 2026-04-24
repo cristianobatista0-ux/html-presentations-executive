@@ -1,0 +1,15 @@
+{
+  "_comment": "Copie para brand.json na pasta do deck e preencha com a paleta oficial da empresa (hex sem #). O gerador mescla estes valores sobre o profile.",
+  "primary": "0B3D5C",
+  "primary_dark": "061F2E",
+  "secondary": "E6F1FA",
+  "accent": "F5A623",
+  "surface": "F4F7FA",
+  "surface_alt": "FFFFFF",
+  "text_dark": "1B2A35",
+  "muted": "5C6B7A",
+  "on_dark": "FFFFFF",
+  "header_font": "Segoe UI Semibold",
+  "body_font": "Segoe UI",
+  "logo_path": null
+}

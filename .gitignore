@@ -1,0 +1,19 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.cursor/skills/executive-presentations/.preview/
+*.pptx
+!**/example_deck.pptx
+
+# Marca (híbrido): estrutura no Git; arquivos reais só local
+.cursor/skills/executive-presentations/brand/brand.json
+.cursor/skills/executive-presentations/brand/logos/*
+!.cursor/skills/executive-presentations/brand/logos/.gitkeep
+!.cursor/skills/executive-presentations/brand/logos/README.md
+.cursor/skills/executive-presentations/brand/images/*
+!.cursor/skills/executive-presentations/brand/images/.gitkeep
+!.cursor/skills/executive-presentations/brand/images/README.md
+.cursor/skills/executive-presentations/brand/reference-decks/*
+!.cursor/skills/executive-presentations/brand/reference-decks/.gitkeep
+!.cursor/skills/executive-presentations/brand/reference-decks/README.md

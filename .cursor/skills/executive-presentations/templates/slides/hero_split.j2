@@ -1,0 +1,22 @@
+{% import "macros.j2" as m %}
+<section class="slide slide-hero theme-band" id="slide-{{ slide_index }}">
+  <div class="preset-signature" aria-hidden="true"></div>
+  <div class="slide-header-strip"><div class="slide-header-inner">{{ m.kicker_title(slide) }}</div></div>
+  <div class="slide-content hero-grid">
+    <div class="hero-main reveal">
+      {% if slide.hero_stat %}<p class="big-number">{{ slide.hero_stat }}</p>{% endif %}
+      {% if slide.hero_label %}<p class="hero-label">{{ slide.hero_label }}</p>{% endif %}
+      {% if slide.bullets %}
+      <ul class="bullet-list">
+        {% for b in slide.bullets %}<li class="reveal">{{ b }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+      {{ m.source_foot(slide) }}
+    </div>
+    <div class="hero-side reveal">
+      {% if slide.image_path %}
+      <img class="hero-img cover" src="{{ asset(slide.image_path) }}" alt="" loading="lazy" />
+      {% else %}<div class="hero-placeholder"></div>{% endif %}
+    </div>
+  </div>
+</section>

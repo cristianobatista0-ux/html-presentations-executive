@@ -1,0 +1,18 @@
+{% import "macros.j2" as m %}
+<section class="slide slide-scqa theme-band" id="slide-{{ slide_index }}">
+  <div class="preset-signature" aria-hidden="true"></div>
+  <div class="slide-header-strip">
+    <div class="slide-header-inner">
+      {{ m.kicker_title(slide) }}
+    </div>
+  </div>
+  <div class="slide-content scqa-body">
+    <div class="scqa-grid">
+      <article class="scqa-card reveal"><span class="scqa-label">S</span><p class="scqa-text">{{ slide.situation }}</p></article>
+      <article class="scqa-card reveal"><span class="scqa-label">C</span><p class="scqa-text">{{ slide.complication }}</p></article>
+      <article class="scqa-card reveal"><span class="scqa-label">Q</span><p class="scqa-text">{{ slide.question }}</p></article>
+      <article class="scqa-card scqa-answer reveal"><span class="scqa-label">A</span><p class="scqa-text">{{ slide.answer }}</p></article>
+    </div>
+    {{ m.source_foot(slide) }}
+  </div>
+</section>
