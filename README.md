@@ -1,58 +1,35 @@
-# Skill `executive-presentations` (Cursor)
+# Skill `frontend-design` (Cursor)
 
-Apresentações executivas: narrativa (Minto, SCQA, BLUF) + **HTML** (presets, viewport-fit) + **PDF** opcional + **PPTX** opcional.
+Este repositório contém **apenas** a skill [**`frontend-design`**](.cursor/skills/frontend-design/SKILL.md) (direção estética, UI, anti–“AI slop”). No Cursor, use **`@frontend-design`** ou priorize esta skill no projeto.
 
-## Fluxo da skill (como as partes conversam)
+## Marca da empresa (guia)
 
-Não há várias skills Cursor neste repo — é **uma** skill com módulos em Markdown e scripts em Python. O agente segue este encadeamento:
+A skill define **Purpose / Tone / Constraints / Differentiation** e boas práticas de UI; **não** substitui o manual de marca. Coloque identidade e tokens **fora** de `.cursor/skills/` (a skill pode ser atualizada por sync).
 
-```mermaid
-flowchart TD
-  userMsg[Pedido no chat]
-  skillHub[SKILL.md hub e regras]
-  intakeDoc[intake.md 7 perguntas]
-  narrativeDoc[narrative.md Minto SCQA BLUF]
-  designDocs[visual-design STYLE_PRESETS ds-reference]
-  brandPack[brand paleta logos imagens]
-  deckJson[deck.json]
-  renderHtml[render_html.py e templates]
-  outPdf[export_pdf.py]
-  outPptx[generate_pptx.py]
+| Artefato | Função |
+|----------|--------|
+| [`brand/brand-brief.md`](brand/brand-brief.md) | Posicionamento, voz, uso de logo, o que evitar (template editável). |
+| [`brand/tokens.json.example`](brand/tokens.json.example) | Modelo de cores, fontes, raios — copie para `brand/tokens.json` (local) e mapeie em `:root` no front. |
+| `brand/logos/` | SVG/PNG oficiais (não versionar ativos confidenciais se a política exigir outro repositório). |
+| [`.gitignore`](.gitignore) | `brand/tokens.json` e `brand/tokens.local.json` podem ficar fora do Git; use o `.example` como base. |
 
-  userMsg --> skillHub
-  skillHub --> intakeDoc
-  intakeDoc --> narrativeDoc
-  narrativeDoc --> designDocs
-  designDocs --> brandPack
-  brandPack --> deckJson
-  deckJson --> renderHtml
-  renderHtml --> outPdf
-  renderHtml -.->|opcional| outPptx
-```
+Regra opcional: [`.cursor/rules/brand.mdc`](.cursor/rules/brand.mdc) — lembrar a IA a ler `brand/` ao estilizar UI.
 
-**Leitura sob demanda:** o agente abre cada `.md` quando o passo exige (ex.: só `intake.md` no início; `STYLE_PRESETS.md` ao escolher preset).
+## Atualizar a skill via CLI
 
-## Trabalho em outro Mac
-
-[SETUP-TRABALHO.md](.cursor/skills/executive-presentations/SETUP-TRABALHO.md) — clone, `venv`, Chrome, pasta `brand/`.
-
-## Marca
-
-[brand/](.cursor/skills/executive-presentations/brand/) — `brand.json` (local, gitignored), `logos/`, `images/`, `reference-decks/`, `examples/board_expansao.json`. Detalhes: [brand/README.md](.cursor/skills/executive-presentations/brand/README.md).
-
-## Instalação e geração
+A `frontend-design` costuma vir de catálogos como [`vercel-labs/skills`](https://github.com/vercel-labs/skills) / Anthropic. Exemplos:
 
 ```bash
-cd .cursor/skills/executive-presentations
-python3 -m venv .venv && source .venv/bin/activate
-pip install -r scripts/requirements.txt
-
-python scripts/render_html.py brand/examples/board_expansao.json "/caminho/absoluto/saida.html"
-python scripts/export_pdf.py "/caminho/absoluto/saida.html" "/caminho/absoluto/saida.pdf"
+npx --package=skills -- skills list
+npx --package=skills -- skills update frontend-design
 ```
 
-PPTX: `python scripts/generate_pptx.py scripts/example_deck.json out.pptx` — Previews: `python scripts/preview_styles.py`
+> Se o CLI instalar em `.agents/skills/`, **mova** para [`.cursor/skills/`](.cursor/skills/) para manter a convenção deste repositório.
 
-## Links rápidos
+## Lock de skills
 
-[SKILL.md](.cursor/skills/executive-presentations/SKILL.md) · [intake.md](.cursor/skills/executive-presentations/intake.md) · [STYLE_PRESETS.md](.cursor/skills/executive-presentations/STYLE_PRESETS.md) · [narrative.md](.cursor/skills/executive-presentations/narrative.md)
+[`skills-lock.json`](skills-lock.json) documenta a skill fixada para a CLI de skills do projeto.
+
+## Link
+
+[`.cursor/skills/frontend-design/SKILL.md`](.cursor/skills/frontend-design/SKILL.md)

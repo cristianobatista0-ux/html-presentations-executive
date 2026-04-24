@@ -1,0 +1,33 @@
+{
+  "_comment": "Copie para brand/tokens.json (local, gitignored). Hex sem # em campos alfanum se preferir consistência com ferramentas; no CSS use # + valor.",
+  "name": "example-brand",
+  "color": {
+    "primary": "0B3D5C",
+    "primary_dark": "061F2E",
+    "secondary": "E6F1FA",
+    "accent": "F5A623",
+    "surface": "F4F7FA",
+    "surface_alt": "FFFFFF",
+    "text_dark": "1B2A35",
+    "muted": "5C6B7A",
+    "on_dark": "FFFFFF",
+    "success": "2A8C5C",
+    "warning": "D97706",
+    "error": "C53030"
+  },
+  "type": {
+    "display": "Syne",
+    "body": "Manrope"
+  },
+  "radius": {
+    "sm": 6,
+    "md": 12,
+    "lg": 16
+  },
+  "space": {
+    "unit": 4
+  },
+  "assets": {
+    "logo_svg": "logos/logo.svg"
+  }
+}

@@ -1,8 +1,0 @@
-{% macro kicker_title(slide) -%}
-  {% if slide.kicker %}<p class="kicker reveal">{{ slide.kicker }}</p>{% endif %}
-  {% if slide.action_title %}<h2 class="action-title reveal">{{ slide.action_title }}</h2>{% endif %}
-{%- endmacro %}
-
-{% macro source_foot(slide) -%}
-  {% if slide.source %}<p class="source reveal">{{ slide.source }}</p>{% endif %}
-{%- endmacro %}

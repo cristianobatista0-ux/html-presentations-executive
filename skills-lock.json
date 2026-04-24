@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "projectTestScope": "frontend-design-only",
+  "projectTestScopeNote": "Repositório contém somente a skill frontend-design em .cursor/skills/. Pinar via CLI de skills se necessário.",
+  "skills": {
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "063a0e6448123cd359ad0044cc46b0e490cc7964d45ef4bb9fd842bd2ffbca67"
+    }
+  }
+}

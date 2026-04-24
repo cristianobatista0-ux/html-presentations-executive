@@ -1,0 +1,12 @@
+---
+description: Aplicar identidade e tokens da marca do projeto em UI
+globs: "**/*.{html,css,tsx,ts,jsx,js,vue,svelte}"
+alwaysApply: false
+---
+
+Ao estilizar interfaces, ler na raiz do repositório:
+
+- `brand/brand-brief.md` — voz, restrições de logo e tom.
+- `brand/tokens.json` se existir (cópia local a partir de `brand/tokens.json.example`); caso contrário, use o example só como guia e confirme cores/fontes com o time.
+
+Mapear tokens a variáveis CSS em `:root` (ex.: `--color-primary`) em vez de repetir hex. Respeitar a skill `frontend-design`: Purpose, Tone, Constraints, Differentiation e evitar padrão genérico “AI slop”.

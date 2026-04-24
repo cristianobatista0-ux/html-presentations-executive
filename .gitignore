@@ -1,23 +1,15 @@
 .venv/
+node_modules/
 __pycache__/
 *.pyc
 .DS_Store
 
-# Decks (JSON/HTML/PDF gerados ou locais)
+# Decks locais (se recriar a pasta)
 decks/
 
-.cursor/skills/executive-presentations/.preview/
-*.pptx
-!**/example_deck.pptx
-
-# Marca (híbrido): estrutura no Git; arquivos reais só local
-.cursor/skills/executive-presentations/brand/brand.json
-.cursor/skills/executive-presentations/brand/logos/*
-!.cursor/skills/executive-presentations/brand/logos/.gitkeep
-!.cursor/skills/executive-presentations/brand/logos/README.md
-.cursor/skills/executive-presentations/brand/images/*
-!.cursor/skills/executive-presentations/brand/images/.gitkeep
-!.cursor/skills/executive-presentations/brand/images/README.md
-.cursor/skills/executive-presentations/brand/reference-decks/*
-!.cursor/skills/executive-presentations/brand/reference-decks/.gitkeep
-!.cursor/skills/executive-presentations/brand/reference-decks/README.md
+# Brand: não commitar tokens reais; use tokens.json.example
+brand/tokens.json
+brand/tokens.local.json
+brand/logos/*
+!brand/logos/.gitkeep
+!brand/logos/README.md
