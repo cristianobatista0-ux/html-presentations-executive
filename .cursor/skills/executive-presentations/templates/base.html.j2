@@ -169,6 +169,49 @@ body.theme-light { background: var(--color-bg); }
 }
 .exec-visual { max-height: min(68vh, 540px); border-radius: clamp(4px, 1vw, 12px); overflow: hidden; }
 
+.exec-chart-wrap {
+  margin-top: var(--content-gap);
+  max-height: min(30vh, 240px);
+  overflow: hidden;
+  border-radius: clamp(4px, 1vw, 10px);
+  background: var(--color-bg);
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: clamp(0.35rem, 1.2vw, 0.65rem);
+}
+.theme-dark .exec-chart-wrap { border-color: rgba(255,255,255,0.1); }
+.exec-chart-wrap svg { width: 100%; height: auto; max-height: min(28vh, 220px); display: block; }
+
+/* Gráficos SVG interativos (hover + tooltip via script) */
+svg.ix-chart .ix-bar { cursor: pointer; }
+svg.ix-chart .ix-bar rect,
+svg.ix-chart .ix-bar circle {
+  transition: filter 0.15s ease, opacity 0.15s ease;
+}
+svg.ix-chart .ix-bar:hover rect,
+svg.ix-chart .ix-bar:hover circle,
+svg.ix-chart .ix-bar:focus-visible rect,
+svg.ix-chart .ix-bar:focus-visible circle {
+  filter: brightness(1.15);
+  opacity: 0.95;
+}
+svg.ix-chart .ix-bar:focus { outline: none; }
+
+#ix-chart-tooltip {
+  position: fixed;
+  z-index: 100;
+  pointer-events: none;
+  display: none;
+  max-width: min(280px, 92vw);
+  padding: 0.4rem 0.65rem;
+  border-radius: 8px;
+  font-size: var(--small-size);
+  line-height: 1.35;
+  background: rgba(15, 15, 15, 0.92);
+  color: #f5f5f5;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+}
+body.theme-light #ix-chart-tooltip { background: rgba(20, 20, 20, 0.94); }
+
 /* KPI */
 .kpi-body { justify-content: center; gap: var(--content-gap); }
 .kpi-row {
@@ -362,6 +405,7 @@ body.theme-light #deck-nav { background: rgba(15,15,15,0.75); }
     {{ inner_html | safe }}
   </main>
   <nav id="deck-nav" aria-live="polite"><span id="nav-idx">1</span> / <span id="nav-total">{{ slide_count }}</span></nav>
+  <div id="ix-chart-tooltip" role="tooltip" hidden></div>
   <script>
 (function () {
   const slides = Array.from(document.querySelectorAll('.slide'));
@@ -433,6 +477,63 @@ body.theme-light #deck-nav { background: rgba(15,15,15,0.75); }
   }
 
   updateNav();
+})();
+
+(function initInteractiveChartTooltips() {
+  const tip = document.getElementById('ix-chart-tooltip');
+  if (!tip) return;
+  let active = null;
+
+  function placeTip(clientX, clientY) {
+    const pad = 12;
+    const tw = tip.offsetWidth || 120;
+    const th = tip.offsetHeight || 40;
+    let x = clientX + pad;
+    let y = clientY + pad;
+    if (x + tw > window.innerWidth - 8) x = clientX - tw - pad;
+    if (y + th > window.innerHeight - 8) y = clientY - th - pad;
+    tip.style.left = x + 'px';
+    tip.style.top = y + 'px';
+  }
+
+  document.addEventListener(
+    'pointerover',
+    function (e) {
+      const g = e.target && e.target.closest && e.target.closest('.ix-chart .ix-bar');
+      if (!g) return;
+      const text = g.getAttribute('data-tip');
+      if (!text) return;
+      active = g;
+      tip.textContent = text;
+      tip.hidden = false;
+      tip.style.display = 'block';
+      placeTip(e.clientX, e.clientY);
+    },
+    true
+  );
+
+  document.addEventListener(
+    'pointermove',
+    function (e) {
+      if (!active) return;
+      placeTip(e.clientX, e.clientY);
+    },
+    true
+  );
+
+  document.addEventListener(
+    'pointerout',
+    function (e) {
+      if (!active) return;
+      const rel = e.relatedTarget;
+      if (rel && active.contains(rel)) return;
+      active = null;
+      tip.textContent = '';
+      tip.hidden = true;
+      tip.style.display = 'none';
+    },
+    true
+  );
 })();
   </script>
 </body>

@@ -67,9 +67,17 @@ def is_dark_bg(hex_color: str) -> bool:
 
 
 def chart_svg(chart: dict[str, Any], preset: Preset, width: int = 680, height: int = 260) -> str:
-    """SVG para column/bar (agrupado) ou line."""
+    """SVG para column/bar (agrupado) ou line.
+
+    Com ``"interactive": true`` no objeto chart, as barras/pontos ganham hover,
+    ``<title>`` nativo e ``data-tip`` para tooltip HTML (ver base.html.j2).
+    Opcional: ``width`` / ``height`` no JSON para dimensionar o viewBox.
+    """
     if not chart:
         return ""
+    width = int(chart.get("width", width))
+    height = int(chart.get("height", height))
+    interactive = bool(chart.get("interactive"))
     ctype = str(chart.get("type", "column")).lower()
     xs = [str(x) for x in chart.get("x", [])]
     series_list = chart.get("series") or []
@@ -90,8 +98,9 @@ def chart_svg(chart: dict[str, Any], preset: Preset, width: int = 680, height: i
                 all_vals.append(0.0)
     vmax = max(all_vals + [1e-9])
 
+    svg_class = ' class="ix-chart"' if interactive else ""
     parts: list[str] = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-label="Gráfico">'
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-label="Gráfico"{svg_class}>'
     ]
 
     if ctype == "line":
@@ -112,7 +121,17 @@ def chart_svg(chart: dict[str, Any], preset: Preset, width: int = 680, height: i
                 for i, v in enumerate(vals):
                     x = pad_l + i * step
                     y = pad_t + plot_h * (1 - v / vmax)
+                    xcat = xs[i] if i < len(xs) else ""
+                    ser_lab = str(s.get("label", ""))
+                    tip = f"{xcat}: {v:g}" + (f" ({ser_lab})" if ser_lab else "")
+                    if interactive:
+                        parts.append(
+                            f'<g class="ix-bar" tabindex="0" focusable="true" data-tip="{_esc_xml(tip)}" aria-label="{_esc_xml(tip)}">'
+                            f'<title>{_esc_xml(tip)}</title>'
+                        )
                     parts.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="4" fill="{col}" />')
+                    if interactive:
+                        parts.append("</g>")
         # eixo X labels
         for i, lab in enumerate(xs):
             x = pad_l + i * (plot_w / max(n - 1, 1))
@@ -143,7 +162,22 @@ def chart_svg(chart: dict[str, Any], preset: Preset, width: int = 680, height: i
             x = gx + j * (bar_w + bar_gap / max(m, 1))
             y = pad_t + plot_h - bh
             col = colors[j % len(colors)]
-            parts.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{bar_w:.1f}" height="{max(bh, 1):.1f}" rx="3" fill="{col}" />')
+            xcat = xs[i] if i < len(xs) else ""
+            ser_lab = str(s.get("label", ""))
+            if m > 1 and ser_lab:
+                tip = f"{xcat} — {ser_lab}: {v:g}"
+            else:
+                tip = f"{xcat}: {v:g}"
+            if interactive:
+                parts.append(
+                    f'<g class="ix-bar" tabindex="0" focusable="true" data-tip="{_esc_xml(tip)}" aria-label="{_esc_xml(tip)}">'
+                    f'<title>{_esc_xml(tip)}</title>'
+                )
+            parts.append(
+                f'<rect x="{x:.1f}" y="{y:.1f}" width="{bar_w:.1f}" height="{max(bh, 1):.1f}" rx="3" fill="{col}" />'
+            )
+            if interactive:
+                parts.append("</g>")
 
     for i, lab in enumerate(xs):
         cx = start_x + i * (group_w + gap) + group_w / 2

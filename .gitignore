@@ -2,6 +2,10 @@
 __pycache__/
 *.pyc
 .DS_Store
+
+# Decks (JSON/HTML/PDF gerados ou locais)
+decks/
+
 .cursor/skills/executive-presentations/.preview/
 *.pptx
 !**/example_deck.pptx
